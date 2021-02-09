@@ -45,3 +45,11 @@ SELECT o."id", SUM(li."quantity" * p."unit_price") FROM "orders" as o
 JOIN "line_items" as li on o."id" = li."order_id"
 JOIN "products" as p on p."id" = li."product_id"
 GROUP BY o."id" ORDER BY o."id";
+
+--10 How much has each customer spent in total?
+SELECT c."id", SUM(li."quantity" * p."unit_price") FROM "customers" as c
+JOIN "addresses" as a on c."id" = a."customer_id"
+JOIN "orders" as o on a."id" = o."address_id"
+JOIN "line_items" as li on o."id" = li."order_id"
+JOIN "products" as p on p."id" = li."product_id"
+GROUP BY c."id" ORDER BY c."id";
