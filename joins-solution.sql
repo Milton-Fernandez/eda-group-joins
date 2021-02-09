@@ -1,3 +1,5 @@
+--Base Goals
+
 --1. Get all customers and their addresses.
 SELECT * FROM "customers"
 JOIN "addresses" ON "addresses".customer_id = "customers".id;
@@ -36,3 +38,10 @@ SELECT "products".description,sum("line_items".quantity) FROM "products"
 JOIN "line_items" ON "line_items".product_id = "products".id
 WHERE "products".description = 'diet pepsi'
 GROUP BY "products".description;
+
+--Stretch
+--9 How much was the total cost for each order?
+SELECT o."id", SUM(li."quantity" * p."unit_price") FROM "orders" as o
+JOIN "line_items" as li on o."id" = li."order_id"
+JOIN "products" as p on p."id" = li."product_id"
+GROUP BY o."id" ORDER BY o."id";
